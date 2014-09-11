@@ -1,5 +1,5 @@
 #    <rank.LN>
-#    Copyright (C) <2014>  <Hsiuying Wang, Yu-Jun Lin>
+#    Copyright (C) <2014>  <Hsiuying Wang, Yu-Chun Lin>
 #
 #
 #    This program is free software; you can redistribute it and/or modify
@@ -21,7 +21,7 @@
 #    GNU General Public License for more details.
 
 rank.LN=function(data,response.number,prior.parameter,c)
-{
+{  
       data=as.matrix(data)
       v=response.number
       alpha=prior.parameter
@@ -79,54 +79,18 @@ rank.LN=function(data,response.number,prior.parameter,c)
 	tv <- round(V[1,],6)
 	pt <- cbind(a1,a2,tv)
 
-      pi=numeric(v)
-      N=sum(AA[,(v+2)])
-      for(i in 1:v){
-
-            pi[i]=sum(AA[AA[,i]==1,(v+2)])/N
-      }
-      
-      names(pi)=c(1:v)
-      pi_temp=sort(pi,decreasing=T)
-      rank_temp=as.numeric(names(pi_temp))    
-            
-      u=numeric(v-1)
-      for(i in 1:(v-1)){
-            
-            u[i]=pt[pt[,1]==rank_temp[i] & pt[,2]==rank_temp[i+1],3]
-      }
-
-
       t=c/(c+1)
 
-      Rej=numeric(v-1)
+      sumI_temp=!(tv>=t)
+      sumI=matrix(sumI_temp,ncol=v-1,nrow=v,byrow=T)
+      rank=v-apply(sumI,1,sum)
 
-      for(i in 1:(v-1)){
-    
-             if(u[i] >= t){Rej[i]=1}
-      }
-
-      rank_temp2=numeric(v)
-      rank_temp2[1]=1
-      for(i in 1:(v-1))
-      {
-
-             if(Rej[i]==1)
-             {
-                rank_temp2[i+1]=rank_temp2[i]+1
-             }else{
- 
-                rank_temp2[i+1]=rank_temp2[i]}
-      }
-      
-      rank=numeric(v)
-      for(i in 1:v)
-      {
-       rank[rank_temp[i]]=rank_temp2[i]
-      }
-      probability=pi
+      probability=apply(data,2,mean)
       result=rbind(probability,rank)
 
       return(result)
 
 }
+
+      
+      

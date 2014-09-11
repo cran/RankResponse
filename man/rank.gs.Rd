@@ -20,13 +20,13 @@ dij = 0.}
 The rank.gs returns the estimated probabilities of the responses being selected and the ranks of the responses by the Generalized score procedure.
 }
 \author{
-Hsiuying Wang\email{wang@stat.nctu.edu.tw},Yu-Jun Lin\email{restart79610@hotmail.com}
+Hsiuying Wang\email{wang@stat.nctu.edu.tw},Yu-Chun Lin\email{restart79610@hotmail.com}
 }
 \references{
 Wang, H. (2008). Ranking Responses in Multiple-Choice Questions. Journal of Applied Statistics, 35, 465-474.
 }
 \seealso{
-\code{\link{rank.btmm}},\code{\link{rank.btnr}},\code{\link{rank.btqn}},\code{\link{rank.L2R}},\code{\link{rank.LN}},\code{\link{rank.LR}},\code{\link{rank.wald}}
+\code{\link{rank.btmm}},\code{\link{rank.btnr}},\code{\link{rank.btqn}},\code{\link{rank.L2R}},\code{\link{rank.LN}},\code{\link{rank.wald}}
 }
 \examples{
 ## This is an example to rank three responses in a multiple response question when

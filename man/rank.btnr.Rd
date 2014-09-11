@@ -19,14 +19,14 @@ dij = 0.}
 The rank.btnr returns the associated  values in the first line and the ranks of the responses in the second line.
 }
 \author{
-Hsiuying Wang\email{wang@stat.nctu.edu.tw},Yu-Jun Lin\email{restart79610@hotmail.com}
+Hsiuying Wang\email{wang@stat.nctu.edu.tw},Yu-Chun Lin\email{restart79610@hotmail.com}
 }
 \references{
 Hunter DR (2004). MM algorithms for generalized Bradley-Terry models. The Annals
 of Statistics, 32, 384-406.
 }
 \seealso{
-\code{\link{rank.btmm}},\code{\link{rank.btqn}},\code{\link{rank.L2R}},\code{\link{rank.LN}},\code{\link{rank.LR}},\code{\link{rank.gs}},\code{\link{rank.wald}}
+\code{\link{rank.btmm}},\code{\link{rank.btqn}},\code{\link{rank.L2R}},\code{\link{rank.LN}},\code{\link{rank.gs}},\code{\link{rank.wald}}
 }
 \examples{
 ## This is an example to rank three responses in a multiple response question when

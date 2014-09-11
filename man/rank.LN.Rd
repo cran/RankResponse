@@ -22,14 +22,14 @@ where the vector dimension is 2^response.number.}
 The rank.LN returns the estimated probabilities of the responses being selected in the first line and the ranks of the responses in the second line.
 }
 \author{
-Hsiuying Wang\email{wang@stat.nctu.edu.tw},Yu-Jun Lin\email{restart79610@hotmail.com}
+Hsiuying Wang\email{wang@stat.nctu.edu.tw},Yu-Chun Lin\email{restart79610@hotmail.com}
 }
 \references{
 Wang, H. and Huang, W. H. (2014). Bayesian Ranking Responses in Multiple Response
 Questions. Journal of the Royal Statistical Society: Series A (Statistics in Society), 177, 191-208.
 }
 \seealso{
-\code{\link{rank.btmm}},\code{\link{rank.btnr}},\code{\link{rank.btqn}},\code{\link{rank.L2R}},\code{\link{rank.LR}},\code{\link{rank.gs}},\code{\link{rank.wald}}
+\code{\link{rank.btmm}},\code{\link{rank.btnr}},\code{\link{rank.btqn}},\code{\link{rank.L2R}},\code{\link{rank.gs}},\code{\link{rank.wald}}
 }
 \examples{
 ## This is an example to rank three responses in a multiple response

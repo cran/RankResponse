@@ -1,5 +1,5 @@
 #    <rank.btnr>
-#    Copyright (C) <2014>  <Hsiuying Wang, Yu-Jun Lin>
+#    Copyright (C) <2014>  <Hsiuying Wang, Yu-Chun Lin>
 #
 #
 #    This program is free software; you can redistribute it and/or modify
@@ -65,7 +65,7 @@ rank.btnr=function(data){
         }
 
         result=round(exp(gamma),4)
-        gamma=result
+        gamma=result/sum(result)
         names(gamma)=c(1:c)
         gamma_temp=as.numeric(names(sort(gamma,decreasing=T)))
         rank=numeric(c)

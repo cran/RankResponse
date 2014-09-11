@@ -1,5 +1,5 @@
 #    <rank.L2R>
-#    Copyright (C) <2014>  <Hsiuying Wang, Yu-Jun Lin>
+#    Copyright (C) <2014>  <Hsiuying Wang, Yu-Chun Lin>
 #
 #
 #    This program is free software; you can redistribute it and/or modify
@@ -120,36 +120,13 @@ rank.L2R=function(data,response.number,prior.parameter,e)
 
       tD_star = t*0.01
 
-      Rej = numeric(v-1)
+      sumI_temp=!(tv>=tD_star)
+      sumI=matrix(sumI_temp,ncol=v-1,nrow=v,byrow=T)
+      rank=v-apply(sumI,1,sum)
 
-      for(i in 1:(v-1)){
-    
-             if(u[i] >= tD_star){Rej[i]=1}
-      }
-
-      rank_temp2=numeric(v)
-      rank_temp2[1]=1
-      for(i in 1:(v-1))
-      {
-
-             if(Rej[i]==1)
-             {
-                rank_temp2[i+1]=rank_temp2[i]+1
-             }else{
- 
-                rank_temp2[i+1]=rank_temp2[i]}
-      }
-      
-      rank=numeric(v)
-      for(i in 1:v)
-      {
-       rank[rank_temp[i]]=rank_temp2[i]
-      }
-      probability=pi
+      probability=apply(data,2,mean)
       result=rbind(probability,rank)
 
       return(result)
 
 }
-
-

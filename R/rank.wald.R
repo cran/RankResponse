@@ -1,5 +1,5 @@
-#    <rank..wald>
-#    Copyright (C) <2014>  <Hsiuying Wang, Yu-Jun Lin>
+#    <rank.wald>
+#    Copyright (C) <2014>  <Hsiuying Wang, Yu-Chun Lin>
 #
 #
 #    This program is free software; you can redistribute it and/or modify
@@ -26,65 +26,56 @@ rank.wald=function(data,alpha,type=2)
   data=data[!apply(apply(data,1,is.na),2,any),]
   n=dim(data)[1]
   k=dim(data)[2]
-
-  m=apply(data,2,sum)
-  names(m)=c(1:k)
   z=qnorm(1-alpha/2)
-  pi=m/n
-  pi_temp=sort(pi)
-
-  t=as.numeric(names(pi_temp))
-  data=data[,t]
-
-  score=numeric(k) 
-  p=k
-  score[k]=k
+  sumI=matrix(0,ncol=k,nrow=k)
 
   for(i in 1:(k-1))
   {
-    q=k-i
-    a=sum(data[,p])/n;b=sum(data[,q])/n
-    if(type==1)
-    {
-       x=abs(a-b)/sqrt((a*(1-a)+b*(1-b)+2*a*b)/n)
-    }else{
+   a=sum(data[,i])/n
+   for(j in (i+1):k)
+   {
+     b=sum(data[,j])/n
+     if(type==1)
+      {
+         x=abs(a-b)/sqrt((a*(1-a)+b*(1-b)+2*a*b)/n)
+      }else{
 
-       c=sum(data[data[,p]==1&data[,q]==1,1])/n
-       x=abs(a-b)/sqrt(((a-c)*(1-a+2*b-c)+(b-c)*(1-b+c))/n)   
-    }  
-    if(x>=z)
-    {
-       p=k-i
-       score[k-i]=q
-    }else{
-
-       p=k-i
-       score[k-i]=p       
+         c=sum(data[data[,i]==1&data[,j]==1,1])/n
+         x=(a-b)/sqrt(((a-c)*(1-a+2*b-c)+(b-c)*(1-b+c))/n)   
+      }  
+      if(x>=z)
+      {
+        sumI[i,j]=1
+      }
     }
   }
 
-  rank_temp=numeric(k)
-  rank_temp[k]=1
-  for(i in (k-1):1)
+  for(i in 2:k)
   {
-      if(score[i+1]>score[i])
+   a=sum(data[,i])/n
+   for(j in 1:(i-1))
+   {
+     b=sum(data[,j])/n
+     if(type==1)
       {
-         rank_temp[i]=rank_temp[i+1]+1
+         x=abs(a-b)/sqrt((a*(1-a)+b*(1-b)+2*a*b)/n)
       }else{
 
-         rank_temp[i]=rank_temp[i+1]
+         c=sum(data[data[,i]==1&data[,j]==1,1])/n
+         x=(a-b)/sqrt(((a-c)*(1-a+2*b-c)+(b-c)*(1-b+c))/n)   
+      }  
+      if(x>=z)
+      {
+        sumI[i,j]=1
       }
-   }
-   
-   rank=numeric(k)
-   for(i in 1:k)
-   {
-     rank[t[i]]=rank_temp[i]
-   }
+    }
+  }
+  
+  rank=k-apply(sumI,1,sum)
 
-   probability=pi
-   result=rbind(probability,rank)
+  probability=apply(data,2,mean)
+  result=rbind(probability,rank)
 
-   return(result)
+  return(result)
 
 }
